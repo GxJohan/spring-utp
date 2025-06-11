@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guía: Prueba de CRUD en Postman con Spring Boot</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', 'Roboto', Arial, sans-serif;
+      color: #000000;
+      background-color: #FFFFFF;
+      line-height: 1.6;
+    }
+    .utp-red { color: #8B0000; }
+    .bg-utp-red { background-color: #8B0000; }
+    .border-utp-red { border-color: #8B0000; }
+    .bg-utp-gray-light { background-color: #F5F5F5; }
+
+    header {
+      background-color: #8B0000;
+      color: white;
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    .section-title {
+      color: #8B0000;
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #F5F5F5;
+    }
+    
+    .card-task {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-left: 5px solid #8B0000;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .card-title-task {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #8B0000;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .code-box {
+        background-color: #282c34;
+        color: #abb2bf;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 0.5rem;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    footer {
+      border-top: 1px solid #eee;
+      padding-top: 1.5rem;
+      margin-top: 3rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== ENCABEZADO ===== -->
+  <header>
+    <div class="container">
+      <div class="d-flex align-items-center">
+        <i class="bi bi-bug-fill display-3 me-3"></i>
+        <div>
+          <h1>Desarrollo Web Integrado</h1>
+          <p>Prueba de un CRUD API con Postman y Spring Boot</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
+  <main class="container">
+
+    <!-- == Introducción y Objetivo == -->
+    <section id="introduccion" class="mb-5">
+      <h2 class="section-title"><i class="bi bi-flag-fill me-2"></i>Objetivo de la Guía</h2>
+      <div class="card-task">
+        <div class="card-title-task">
+          <i class="bi bi-bullseye me-2"></i>
+          Validar una API REST
+        </div>
+        <p>El objetivo de esta guía es que los estudiantes aprendan a utilizar <strong>Postman</strong> para probar y validar los diferentes endpoints de una API REST creada con Spring Boot. Realizaremos peticiones para cada una de las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre un recurso de "Computadoras".</p>
+        <p>Esta es una habilidad fundamental para el desarrollo backend, ya que permite verificar el funcionamiento de la lógica de negocio antes de integrarla con un frontend.</p>
+      </div>
+    </section>
+
+    <!-- == Pasos Previos == -->
+    <section id="pasos-previos" class="mb-5">
+        <h2 class="section-title"><i class="bi bi-list-check me-2"></i>Pasos Previos</h2>
+
+        <div class="card-task">
+            <h3 class="fw-bold text-dark"><i class="bi bi-github me-2"></i>1. Clonar el Repositorio</h3>
+            <p>Asegúrate de tener el código del proyecto. Si no lo tienes, clónalo desde GitHub con el siguiente comando:</p>
+            <div class="code-box">
+                git clone https://github.com/GxJohan/spring-utp
+            </div>
+        </div>
+
+        <div class="card-task">
+            <h3 class="fw-bold text-dark"><i class="bi bi-power me-2"></i>2. Ejecutar el Proyecto Spring Boot</h3>
+            <p>Abre el proyecto en tu IDE (IntelliJ IDEA, VSCode, etc.) y ejecútalo. La aplicación se iniciará en el puerto <strong>8080</strong> por defecto.</p>
+        </div>
+    </section>
+
+    <!-- == Pruebas en Postman == -->
+    <section id="pruebas" class="mb-5">
+        <h2 class="section-title"><i class="bi bi-send-fill me-2"></i>Probando los Endpoints con Postman</h2>
+
+        <!-- POST -->
+        <div class="card-task">
+            <h3 class="fw-bold text-dark">1. Crear una Computadora (POST)</h3>
+            <p>Esta operación permite registrar un nuevo recurso.</p>
+            <ul>
+                <li><strong>Método:</strong> <span class="badge bg-success">POST</span></li>
+                <li><strong>URL:</strong> <code class="text-dark">http://localhost:8080/api/computadoras</code></li>
+                <li>Selecciona la pestaña <strong>Body</strong>, elige la opción <strong>raw</strong> y el formato <strong>JSON</strong>.</li>
+            </ul>
+            <p>Pega el siguiente JSON en el cuerpo de la petición:</p>
+            <div class="code-box">
+{
+    "marca": "HP",
+    "modelo": "Pavilion",
+    "precio": 2500.00
+}
+            </div>
+            <p>Al enviar la petición, deberías recibir un estado <strong>201 Created</strong> y el objeto creado con su nuevo ID.</p>
+        </div>
+
+        <!-- GET All -->
+        <div class="card-task">
+            <h3 class="fw-bold text-dark">2. Obtener Todas las Computadoras (GET)</h3>
+            <p>Esta operación devuelve una lista de todos los recursos existentes.</p>
+            <ul>
+                <li><strong>Método:</strong> <span class="badge bg-primary">GET</span></li>
+                <li><strong>URL:</strong> <code class="text-dark">http://localhost:8080/api/computadoras</code></li>
+            </ul>
+            <p>Al enviar la petición, recibirás un estado <strong>200 OK</strong> y un array de objetos JSON.</p>
+        </div>
+
+        <!-- GET by ID -->
+        <div class="card-task">
+            <h3 class="fw-bold text-dark">3. Obtener una Computadora por ID (GET)</h3>
+            <p>Permite consultar un recurso específico usando su identificador.</p>
+            <ul>
+                <li><strong>Método:</strong> <span class="badge bg-primary">GET</span></li>
+                <li><strong>URL:</strong> <code class="text-dark">http://localhost:8080/api/computadoras/1</code> (reemplaza el '1' por un ID que exista).</li>
+            </ul>
+            <p>Si el ID existe, recibirás un <strong>200 OK</strong> y el objeto. Si no, un <strong>404 Not Found</strong>.</p>
+        </div>
+
+        <!-- PUT -->
+        <div class="card-task">
+            <h3 class="fw-bold text-dark">4. Actualizar una Computadora (PUT)</h3>
+            <p>Modifica un recurso existente.</p>
+            <ul>
+                <li><strong>Método:</strong> <span class="badge bg-warning text-dark">PUT</span></li>
+                <li><strong>URL:</strong> <code class="text-dark">http://localhost:8080/api/computadoras/1</code> (reemplaza el '1' por el ID a actualizar).</li>
+                <li>Configura el <strong>Body</strong> igual que en la petición POST.</li>
+            </ul>
+             <p>Pega el siguiente JSON en el cuerpo de la petición para modificar los datos:</p>
+            <div class="code-box">
+{
+    "marca": "HP",
+    "modelo": "OMEN",
+    "precio": 4500.00
+}
+            </div>
+            <p>Recibirás un <strong>200 OK</strong> con el objeto actualizado o un <strong>404 Not Found</strong> si el ID no existe.</p>
+        </div>
+
+        <!-- DELETE -->
+        <div class="card-task">
+            <h3 class="fw-bold text-dark">5. Eliminar una Computadora (DELETE)</h3>
+            <p>Elimina un recurso de la base de datos.</p>
+            <ul>
+                <li><strong>Método:</strong> <span class="badge bg-danger">DELETE</span></li>
+                <li><strong>URL:</strong> <code class="text-dark">http://localhost:8080/api/computadoras/1</code> (reemplaza el '1' por el ID a eliminar).</li>
+            </ul>
+            <p>Una eliminación exitosa devolverá un estado <strong>204 No Content</strong>. Si intentas obtener el recurso después, recibirás un <strong>404 Not Found</strong>.</p>
+        </div>
+    </section>
+
+  </main>
+
+  <!-- ===== PIE DE PÁGINA ===== -->
+  <footer class="container text-center py-4">
+    <p>Guía de Pruebas API desarrollada por Ms. Johan López Heredia (c27444@utp.edu.pe)</p>
+    <p>Curso: Desarrollo Web Integrado</p>
+    <p>Fecha Generación: 10/06/2025 | Licencia: CC BY-SA 4.0</p>
+    <p>Universidad Tecnológica del Perú</p>
+  </footer>
+
+</body>
+</html>
