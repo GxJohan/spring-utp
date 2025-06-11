@@ -1,0 +1,5 @@
+com/utp/ventacomputadoras/repository/ComputadoraRepository.class
+com/utp/ventacomputadoras/service/ComputadoraService.class
+com/utp/ventacomputadoras/controller/ComputadoraController.class
+com/utp/ventacomputadoras/VentacomputadorasApplication.class
+com/utp/ventacomputadoras/model/Computadora.class
