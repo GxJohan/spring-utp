@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-VentacomputadorasApplication<ventacomputadoras>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.utp.ventacomputadoras.VentacomputadorasApplication",
+            "projectName": "ventacomputadoras",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
