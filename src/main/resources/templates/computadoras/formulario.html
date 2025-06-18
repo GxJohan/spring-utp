@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Computadora - Venta de Computadoras</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1>Sistema de Venta de Computadoras</h1>
+                <ul>
+                    <li><a th:href="@{/}">Inicio</a></li>
+                    <li><a th:href="@{/computadoras}" class="active">Thymeleaf (MVC)</a></li>
+                    <li><a th:href="@{/static.html}">HTML/JS (API REST)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 th:text="${computadora.id != null ? 'Editar Computadora' : 'Nueva Computadora'}">Nueva Computadora</h2>
+
+        <form th:action="@{/computadoras/guardar}" th:object="${computadora}" method="post">
+            <input type="hidden" th:field="*{id}" />
+            
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" th:field="*{marca}" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" th:field="*{modelo}" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="procesador">Procesador:</label>
+                <input type="text" id="procesador" th:field="*{procesador}" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="memoriaRam">Memoria RAM (GB):</label>
+                <input type="number" id="memoriaRam" th:field="*{memoriaRam}" class="form-control" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="almacenamiento">Almacenamiento (GB):</label>
+                <input type="number" id="almacenamiento" th:field="*{almacenamiento}" class="form-control" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tipoAlmacenamiento">Tipo de Almacenamiento:</label>
+                <select id="tipoAlmacenamiento" th:field="*{tipoAlmacenamiento}" class="form-control" required>
+                    <option value="">Seleccione...</option>
+                    <option value="HDD">HDD</option>
+                    <option value="SSD">SSD</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" th:field="*{precio}" class="form-control" step="0.01" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="stock">Stock:</label>
+                <input type="number" id="stock" th:field="*{stock}" class="form-control" min="0" required>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a th:href="@{/computadoras}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Universidad Tecnológica del Perú - Ejemplo educativo</p>
+        </div>
+    </footer>
+</body>
+</html>

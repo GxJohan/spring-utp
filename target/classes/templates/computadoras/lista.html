@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Computadoras - Venta de Computadoras</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1>Sistema de Venta de Computadoras</h1>
+                <ul>
+                    <li><a th:href="@{/}">Inicio</a></li>
+                    <li><a th:href="@{/computadoras}" class="active">Thymeleaf (MVC)</a></li>
+                    <li><a th:href="@{/static.html}">HTML/JS (API REST)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Lista de Computadoras (Thymeleaf)</h2>
+        
+        <div th:if="${mensaje}" class="alert alert-success">
+            <span th:text="${mensaje}"></span>
+        </div>
+
+        <div class="actions">
+            <a th:href="@{/computadoras/nueva}" class="btn btn-primary">Nueva Computadora</a>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Procesador</th>
+                    <th>RAM (GB)</th>
+                    <th>Almacenamiento</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="computadora : ${computadoras}">
+                    <td th:text="${computadora.id}">1</td>
+                    <td th:text="${computadora.marca}">HP</td>
+                    <td th:text="${computadora.modelo}">Pavilion</td>
+                    <td th:text="${computadora.procesador}">Intel Core i5</td>
+                    <td th:text="${computadora.memoriaRam}">8</td>
+                    <td>
+                        <span th:text="${computadora.almacenamiento + 'GB ' + computadora.tipoAlmacenamiento}">500GB HDD</span>
+                    </td>
+                    <td th:text="${'$' + #numbers.formatDecimal(computadora.precio, 1, 2)}">$799.99</td>
+                    <td th:text="${computadora.stock}">10</td>
+                    <td>
+                        <a th:href="@{/computadoras/editar/{id}(id=${computadora.id})}" class="btn btn-sm btn-secondary">Editar</a>
+                        <a th:href="@{/computadoras/eliminar/{id}(id=${computadora.id})}" 
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('¿Está seguro de eliminar esta computadora?')">Eliminar</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(computadoras)}">
+                    <td colspan="9" class="text-center">No hay computadoras registradas</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Universidad Tecnológica del Perú - Ejemplo educativo</p>
+        </div>
+    </footer>
+</body>
+</html>

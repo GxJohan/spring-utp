@@ -1,0 +1,38 @@
+# COMANDOS DE DEMOSTRACIÓN
+
+# 1. Ver la API REST directamente:
+curl http://localhost:8081/api/computadoras | jq
+
+# 2. Crear una computadora via API:
+curl -X POST http://localhost:8081/api/computadoras \
+  -H "Content-Type: application/json" \
+  -d '{
+    "marca": "Apple",
+    "modelo": "MacBook Pro",
+    "procesador": "M3 Pro",
+    "memoriaRam": 32,
+    "almacenamiento": 1024,
+    "tipoAlmacenamiento": "SSD",
+    "precio": 3999.99,
+    "stock": 5
+  }'
+
+# 3. Ver una computadora específica:
+curl http://localhost:8081/api/computadoras/1 | jq
+
+# 4. Actualizar una computadora:
+curl -X PUT http://localhost:8081/api/computadoras/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "marca": "Apple",
+    "modelo": "MacBook Pro M3",
+    "procesador": "M3 Pro",
+    "memoriaRam": 32,
+    "almacenamiento": 1024,
+    "tipoAlmacenamiento": "SSD",
+    "precio": 3799.99,
+    "stock": 4
+  }'
+
+# 5. Eliminar una computadora:
+curl -X DELETE http://localhost:8081/api/computadoras/1

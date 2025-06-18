@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Venta de Computadoras</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1>Sistema de Venta de Computadoras</h1>
+                <ul>
+                    <li><a th:href="@{/}" class="active">Inicio</a></li>
+                    <li><a th:href="@{/computadoras}">Thymeleaf (MVC)</a></li>
+                    <li><a th:href="@{/static.html}">HTML/JS (API REST)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="hero">
+            <h1>Bienvenido al Sistema de Venta de Computadoras</h1>
+            <p>Este es un proyecto educativo que demuestra dos formas diferentes de crear interfaces web con Spring Boot</p>
+        </div>
+
+        <div class="demo-cards">
+            <div class="demo-card">
+                <h3>Opción 1: Thymeleaf (MVC)</h3>
+                <p>Utiliza el patrón MVC tradicional con renderizado del lado del servidor usando Thymeleaf como motor de plantillas.</p>
+                <ul style="text-align: left; margin: 1rem 0;">
+                    <li>Renderizado en el servidor</li>
+                    <li>Páginas HTML dinámicas</li>
+                    <li>Formularios tradicionales</li>
+                    <li>Navegación con recargas de página</li>
+                </ul>
+                <a th:href="@{/computadoras}" class="btn btn-primary">Ver Demo Thymeleaf</a>
+            </div>
+
+            <div class="demo-card">
+                <h3>Opción 2: HTML/JS + API REST</h3>
+                <p>Utiliza HTML estático con JavaScript para consumir la API REST, siguiendo el patrón SPA (Single Page Application).</p>
+                <ul style="text-align: left; margin: 1rem 0;">
+                    <li>Renderizado en el cliente</li>
+                    <li>Consumo de API REST</li>
+                    <li>Actualización dinámica sin recargas</li>
+                    <li>JavaScript con Fetch API</li>
+                </ul>
+                <a th:href="@{/static.html}" class="btn btn-primary">Ver Demo API REST</a>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; background-color: #ecf0f1; padding: 2rem; border-radius: 8px;">
+            <h2>Información técnica</h2>
+            <p><strong>Endpoints disponibles:</strong></p>
+            <ul style="margin: 1rem 0;">
+                <li><strong>Vista Thymeleaf:</strong> <code>/computadoras</code> (Controlador MVC)</li>
+                <li><strong>Vista HTML/JS:</strong> <code>/static.html</code> (Archivo estático)</li>
+                <li><strong>API REST:</strong> <code>/api/computadoras</code> (JSON)</li>
+                <li><strong>Base de datos H2:</strong> <code>/h2-console</code></li>
+            </ul>
+            <p><strong>Puerto del servidor:</strong> 8081</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Universidad Tecnológica del Perú - Ejemplo educativo</p>
+        </div>
+    </footer>
+</body>
+</html>

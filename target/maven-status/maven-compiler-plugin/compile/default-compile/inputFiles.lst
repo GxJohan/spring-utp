@@ -1,5 +1,7 @@
 /home/gxjohan/projects/dwi/spring-utp/src/main/java/com/utp/ventacomputadoras/repository/ComputadoraRepository.java
+/home/gxjohan/projects/dwi/spring-utp/src/main/java/com/utp/ventacomputadoras/controller/ComputadoraWebController.java
 /home/gxjohan/projects/dwi/spring-utp/src/main/java/com/utp/ventacomputadoras/model/Computadora.java
 /home/gxjohan/projects/dwi/spring-utp/src/main/java/com/utp/ventacomputadoras/controller/ComputadoraController.java
+/home/gxjohan/projects/dwi/spring-utp/src/main/java/com/utp/ventacomputadoras/controller/HomeController.java
 /home/gxjohan/projects/dwi/spring-utp/src/main/java/com/utp/ventacomputadoras/service/ComputadoraService.java
 /home/gxjohan/projects/dwi/spring-utp/src/main/java/com/utp/ventacomputadoras/VentacomputadorasApplication.java
